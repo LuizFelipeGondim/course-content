@@ -2,5 +2,4 @@
 
 ```
   Content for informatic course
-
 ```
