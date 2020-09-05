@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>{% block title %}{% endblock title %}</title>
+
+        <link rel="icon" type="imagem/png" href="static/img/meufavicon.png" />
+
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}">
+
+
+    </head>
+
+    <body>
+
+        <header>
+            <input type="checkbox" id="btn-menu">
+            <label id="menu_icon" for="btn-menu">
+                <div></div>
+                <div></div>
+                <div></div> 
+            </label>
+            <form action="https://www.google.com/search" id="form-header-responsive">
+                <input type="text" name="q" placeholder="  Search" >                
+            </form>
+
+            <nav id="menu">
+            
+                <ul>
+                    <li><a href="/apoie">APOIE-NOS</a></li> 
+                    <li><a href="/index">HOME</a></li>
+                    {% block botao %}
+                    {% endblock %} 
+                    <li>
+                        <form action="https://www.google.com/search">
+                            <input type="text" name="q" placeholder="  Search">
+                        </form>
+                    </li>
+                </ul>
+            
+            </nav>
+            
+        </header>
+
+        {% block content %}    
+        {% endblock content %}
+                
+        <footer>
+            
+                        
+            <div id="footer-center">
+                <div class="footer-itens">
+                    <div class="icon-bar">
+                        <a href="https://www.facebook.com/" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.instagram.com" class="instagram" target="_blank"><i class="fa fa-instagram"></i></a> </br>
+                        <a href="https://www.youtube.com/" class="youtube" target="_blank"><i class="fa fa-youtube"></i></a>
+                        <a href="https://twitter.com/" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                        
+                <div class="footer-itens" style="margin-top:50px;">
+                    <ul>
+                        <li><span style="font-weight: 600;">EMAIL PARA CONTATO</span> <br/> 
+                            <a href="www.gmail.com">luizfelipegondimaraujo@gmail.com</a></li> <br/>
+                        <li><span style="font-weight: 600;">ATENDIMENTO</span><br/> 
+                            De Segunda a Sexta, das 19h00 às 22h00 </li>
+                    </ul>    
+            
+                </div>
+                <div id="footer-desc" >
+                        <center>
+                            <img src="static/img/footer.png" alt="logo do IF">
+                        </center>
+                        <p>Página voltada ao ensino de algumas áreas da informática,
+                            visando o auxílio daqueles que iniciam nesse mundo. 
+                        </p>
+                 </div>
+            </div>
+
+            <div id="copy">
+                <p>&copy; Virtual Teaching</p>
+            </div>
+    
+        </footer>
+
+            <div id="mySidepanel" class="sidepanel">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="content-section">
+                    <div class="media">
+                        {% if image %}
+                        <img class="rounded-circle account-img" style="height: 70px; width:70px"  src="{{ url_for('static', filename=image) }}">
+                        {% endif %}
+                        <div>
+                            <h2 class="account-heading">{{ current_user.username }}</h2>
+                            <p class="text-secondary">{{ current_user.email }}</p>
+                        </div>
+                        {% block caixa %} 
+                        {% endblock  %}
+                        <a href="/logout" onclick="closeNav()" style="font-size: 15px; margin-left: -30px;">SAIR</a>
+                    </div>
+                </div>
+                
+               
+            </div>
+
+        <script type="text/javascript">
+            function openNav() {
+                document.getElementById("mySidepanel").style.width = "250px";
+            }
+            
+            function closeNav() {
+                document.getElementById("mySidepanel").style.width = "0";
+            } 
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                content.style.display = "none";
+                } else {
+                content.style.display = "block";
+                }
+            });
+            }
+        </script>
+    </body>
+</html>
