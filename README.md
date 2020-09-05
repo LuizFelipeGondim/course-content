@@ -1,5 +1,5 @@
 # course-content
 
 ```
-  Content for informatic course
+  Content for Computing Course
 ```
